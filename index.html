@@ -89,6 +89,55 @@
         .close-social { align-self: flex-end; background: transparent; border: none; color: #888; font-size: 16px; cursor: pointer; margin-bottom: -5px; margin-top: -5px; transition: 0.2s; }
         .close-social:hover { color: #fff; }
 
+       .top-header{
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #00ff9d;
+
+    padding: 10px 22px;
+    border-radius: 14px;
+
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(0, 255, 157, 0.25);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    text-transform: uppercase;
+
+    /* Neon Glow */
+    text-shadow: 
+        0 0 5px #00ff9d,
+        0 0 10px #00ff9d,
+        0 0 20px #00ff9d;
+
+    box-shadow:
+        0 0 10px rgba(0, 255, 157, 0.3),
+        0 0 25px rgba(0, 255, 157, 0.15);
+
+    animation: neonPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes neonPulse {
+    0% {
+        transform: translateX(-50%) scale(1);
+        text-shadow: 0 0 5px #00ff9d, 0 0 10px #00ff9d;
+    }
+    50% {
+        transform: translateX(-50%) scale(1.05);
+        text-shadow: 0 0 10px #00ff9d, 0 0 25px #00ff9d;
+    }
+    100% {
+        transform: translateX(-50%) scale(1);
+        text-shadow: 0 0 5px #00ff9d, 0 0 10px #00ff9d;
+    }
+}
+        
         /* Updated Server Box - Premium & Responsive */
         .server-box { 
             position: absolute; top: 30px; right: 30px; z-index: 999;
