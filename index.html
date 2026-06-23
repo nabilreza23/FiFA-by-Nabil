@@ -323,7 +323,8 @@
     });
 
     player.ready(function() {
-        if (!localStorage.getItem('isPremiumUnlocked')) {
+    document.getElementById('content-locker').style.display = 'none';
+    localStorage.setItem('isPremiumUnlocked', 'true');
             document.getElementById('content-locker').style.display = 'flex';
             player.pause(); 
             startAutoUnlock(); // ১০ সেকেন্ডের অটো-টাইমার ট্রিগার করা হলো
