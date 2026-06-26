@@ -1,144 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FIFA FHD Premium by Nabil Reza</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet">
+
     <style>
-        :root {
-            --primary: #00ff66;
-            --primary-glow: rgba(0, 255, 102, 0.4);
-            --bg-dark: #020a05;
-            --card-bg: rgba(7, 26, 14, 0.4);
-            --border-color: rgba(0, 255, 102, 0.15);
-        }
-
+        /* Cyberpunk Ultra Dark Green Global Styles */
         body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            background-color: var(--bg-dark); overflow-x: hidden;
-            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif; color: #e2f7e7;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #010703;
+            overflow-x: hidden;
+            font-family: 'Hind Siliguri', 'Inter', sans-serif;
+            color: #e2f7e7;
         }
 
-        /* Top Premium Border Line */
-        body::before {
-            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, #00521a, var(--primary), #00521a); z-index: 99999;
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
         }
 
-        .app-container { display: flex; flex-direction: column; width: 100%; height: 100vh; }
-        
-        /* Video Player Area with Subtle Shadow */
+        /* Video Player Area with Neon Border Line */
         .player-section {
-            position: relative; width: 100%; aspect-ratio: 16/9; background: #000;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 255, 102, 0.1);
-            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            box-shadow: 0 4px 30px rgba(0, 255, 102, 0.25);
+            border-bottom: 2px solid #00ff66;
         }
-        #vjs-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; }
-        .video-js { width: 100% !important; height: 100% !important; background-color: transparent; }
-        .video-js .vjs-big-play-button { display: none !important; }
-        
-        /* Content Styling */
-        .content-section { 
-            flex: 1; overflow-y: auto; padding: 24px; box-sizing: border-box; 
-            background: linear-gradient(180deg, rgba(2,10,5,1) 0%, rgba(1,4,2,1) 100%); 
-        }
-        
-        .video-title { 
-            font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 8px; 
-            letter-spacing: -0.5px; line-height: 1.3;
-        }
-        
-        /* Glassmorphic Stats Row */
-        .meta-stats-row { 
-            display: flex; align-items: center; gap: 12px; margin: 14px 0 20px 0; font-size: 13.5px; 
-        }
-        .global-live-badge { 
-            background: rgba(0, 255, 102, 0.1); border: 1px solid rgba(0, 255, 102, 0.4); 
-            border-radius: 6px; padding: 4px 10px; font-weight: 700; color: var(--primary); 
-            text-transform: uppercase; font-size: 11.5px; display: flex; align-items: center; 
-            box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
-        }
-        .global-live-badge::before { 
-            content: ''; display: inline-block; width: 6px; height: 6px; background-color: var(--primary); 
-            border-radius: 50%; margin-right: 6px; box-shadow: 0 0 8px var(--primary); animation: pulse-dot 1.8s infinite; 
-        }
-        .vjs-view-counter { 
-            display: flex; align-items: center; color: #a3c2ab; font-weight: 500; 
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255,255,255,0.05);
-            padding: 4px 12px; border-radius: 6px;
-        }
-        .vjs-view-counter span { color: var(--primary); font-weight: 700; margin-right: 4px; margin-left: 4px;}
-        .vjs-view-counter svg { fill: #a3c2ab; margin-right: 6px; }
 
-        @keyframes pulse-dot { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
-        
-        /* Modernized VideoJS Control Bar */
+        #vjs-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .video-js {
+            width: 100% !important;
+            height: 100% !important;
+            background-color: transparent;
+        }
+
+        /* Remove big play button permanently */
+        .video-js .vjs-big-play-button {
+            display: none !important;
+        }
+
+        /* Scrollable Content Area */
+        .content-section {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            background: linear-gradient(to bottom, #010703, #031409);
+        }
+
+        .video-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            text-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+            line-height: 1.4;
+        }
+
+        /* 🟢 VIDEOJS CUSTOM CONTROL BAR - 100% BACK & FIXED */
         .video-js .vjs-control-bar {
-            background: rgba(2, 10, 5, 0.75) !important; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px !important; bottom: 14px !important; 
-            left: 50% !important; transform: translateX(-50%) !important; width: calc(100% - 28px) !important; 
-            height: 52px !important; display: flex !important; align-items: center !important; box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            background: rgba(1, 7, 3, 0.9) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 102, 0.4) !important; /* নিয়ন বর্ডার স্পষ্ট করা হয়েছে */
+            border-radius: 14px !important;
+            bottom: 10px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 20px) !important;
+            height: 48px !important;
+            display: flex !important;
+            align-items: center !important;
+            padding: 0 10px !important;
+            box-shadow: 0 0 25px rgba(0, 255, 102, .35) !important; /* গ্লো বাড়ানো হয়েছে */
+            opacity: 1 !important; /* সবসময় ভিজিবল থাকবে */
         }
-        .video-js .vjs-button { width: 40px !important; height: 40px !important; color: #fff !important; transition: all 0.3s ease; }
-        .video-js .vjs-button:hover { color: var(--primary) !important; transform: scale(1.08); }
-        .video-js .vjs-progress-control { display: flex !important; align-items: center; }
-        .video-js .vjs-progress-holder { height: 5px; border-radius: 3px; background: rgba(255, 255, 255, 0.1); }
-        .video-js .vjs-play-progress { background-color: var(--primary); border-radius: 3px; box-shadow: 0 0 12px var(--primary); }
-        .video-js .vjs-load-progress { background: rgba(255, 255, 255, 0.05) !important; }
-        .video-js .vjs-picture-in-picture-control { margin-left: auto !important; }
-        .video-js .vjs-live-control, .video-js .vjs-live-display, .vjs-current-time, .vjs-duration, .vjs-remaining-time, .vjs-time-divider { display: none !important; }
 
-        /* Premium Channel Section */
-        .channel-row { 
-            display: flex; align-items: center; padding: 16px; background: var(--card-bg);
-            backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 16px; margin-bottom: 20px; 
+        .video-js .vjs-button {
+            width: 38px !important;
+            height: 38px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 50% !important;
+            margin: 0 3px !important;
+            background: transparent !important;
+            color: #00ff66 !important; /* বাটন কালার ব্যাক */
+            cursor: pointer;
         }
-        .channel-info { display: flex; align-items: center; gap: 14px; }
-        .channel-avatar { 
-            width: 44px; height: 44px; background: linear-gradient(135deg, var(--primary), #00330a); 
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            font-weight: 700; color: #fff; border: 1px solid var(--primary); box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+
+        .video-js .vjs-button:hover {
+            background: rgba(0, 255, 102, 0.2) !important;
+            text-shadow: 0 0 10px #00ff66;
         }
-        .channel-name { font-size: 16px; font-weight: 700; color: #fff; }
-        .channel-subs { font-size: 12.5px; color: #a3c2ab; margin-top: 2px; }
-        
-        /* Elegant Social Box */
-        .social-box { display: flex; gap: 14px; margin-bottom: 24px; }
-        .social-btn { 
-            flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; 
-            border-radius: 14px; font-size: 14px; font-weight: 700; color: #fff; text-decoration: none; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+        .video-js .vjs-icon-placeholder:before {
+            font-size: 1.6em !important;
+            line-height: 1 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ff66 !important;
         }
-        .btn-fb { background: rgba(24, 119, 242, 0.1); border: 1px solid rgba(24, 119, 242, 0.3); color: #7cb4ff; }
-        .btn-fb:hover { background: #1877F2; color: #fff; box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3); transform: translateY(-2px); }
-        .btn-tg { background: rgba(0, 255, 102, 0.05); border: 1px solid rgba(0, 255, 102, 0.25); color: var(--primary); }
-        .btn-tg:hover { background: var(--primary); color: var(--bg-dark); box-shadow: 0 8px 25px rgba(0, 255, 102, 0.3); transform: translateY(-2px); }
-        
-        /* Ultra Luxury Node Selector */
-        .server-section-title { 
-            font-size: 13px; font-weight: 700; margin-bottom: 14px; color: #7aa385; 
-            text-transform: uppercase; letter-spacing: 1.5px; display: flex; align-items: center; gap: 8px; 
+
+        .video-js .vjs-volume-panel {
+            display: flex !important;
+            align-items: center !important;
+            width: auto !important;
         }
-        .server-section-title::before { content: ''; display: inline-block; width: 3px; height: 12px; background: var(--primary); border-radius: 2px; }
-        
-        .server-btn { 
-            background: linear-gradient(135deg, rgba(7, 36, 17, 0.6), rgba(2, 15, 6, 0.8)); 
-            color: var(--primary); border: 1px solid var(--primary); padding: 18px 24px; border-radius: 16px; 
-            font-size: 15px; font-weight: 800; width: 100%; text-align: left; display: flex; 
-            align-items: center; justify-content: space-between; cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.05);
-            transition: all 0.4s ease;
+
+        .video-js .vjs-volume-control {
+            display: flex !important;
+            align-items: center !important;
+            height: 100% !important;
         }
-        .server-btn:hover { box-shadow: 0 0 25px rgba(0, 255, 102, 0.3); transform: scale(1.01); }
-        .badge-hd::after { 
-            content: 'HQ STABLE'; background: linear-gradient(90deg, #00ff66, #00993d); color: #010703; 
-            font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.5px;
+
+        .video-js .vjs-picture-in-picture-control {
+            margin-left: auto !important;
+        }
+
+        /* Hiding redundant controls */
+        .video-js .vjs-live-control,
+        .video-js .vjs-live-display,
+        .vjs-current-time,
+        .vjs-duration,
+        .vjs-remaining-time,
+        .vjs-time-divider {
+            display: none !important;
+        }
+
+        /* PROGRESS BAR - Glowing Cyber Green */
+        .video-js .vjs-progress-control {
+            display: flex !important;
+            flex: auto;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .video-js .vjs-progress-holder {
+            height: 5px;
+            border-radius: 3px;
+            background: rgba(0, 255, 102, 0.15);
+        }
+
+        .video-js .vjs-play-progress {
+            background-color: #00ff66 !important;
+            border-radius: 3px;
+            box-shadow: 0 0 12px #00ff66;
+        }
+
+        .video-js .vjs-play-progress:before {
+            font-size: 12px;
+            top: -3px;
+            color: #00ff66;
+            text-shadow: 0 0 6px #00ff66;
+        }
+
+        .video-js .vjs-load-progress, 
+        .video-js .vjs-load-progress div {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-radius: 3px;
+        }
+
+        /* Stats UI Design */
+        .meta-stats-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 14px 0 18px 0;
+            font-size: 13.5px;
+            color: #a3c2ab;
+        }
+
+        .global-live-badge {
+            background: rgba(0, 255, 102, 0.12);
+            border: 1px solid rgba(0, 255, 102, 0.5);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-weight: 700;
+            letter-spacing: .7px;
+            color: #00ff66;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+        }
+
+        .global-live-badge::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #00ff66;
+            border-radius: 50%;
+            margin-right: 6px;
+            box-shadow: 0 0 10px #00ff66;
+            animation: pulse-dot 1.5s infinite;
+        }
+
+        .vjs-view-counter {
+            display: flex;
+            align-items: center;
+            color: #00ff66;
+            font-weight: 600;
+            background: rgba(0, 255, 102, 0.04);
+            border: 1px solid rgba(0, 255, 102, 0.1);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .vjs-view-counter svg {
+            margin-right: 6px;
+            fill: #00ff66;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, .7) }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 255, 102, 0) }
+            100% { transform: scale(.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0) }
+        }
+
+        /* Channel Block Custom Glow */
+        .channel-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px;
+            background: rgba(0, 34, 10, 0.2);
+            border: 1px solid rgba(0, 255, 102, 0.15);
+            border-radius: 14px;
+            margin-bottom: 18px;
+        }
+
+        .channel-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .channel-avatar {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #00ff66, #00220a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            border: 1px solid #00ff66;
+            box-shadow: 0 0 12px rgba(0, 255, 102, 0.4);
+            font-size: 16px;
+        }
+
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .channel-subs {
+            font-size: 12.5px;
+            color: #a3c2ab;
+        }
+
+        /* Streaming Buttons Box */
+        .social-box {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            transition: .3s ease;
+        }
+
+        .btn-fb {
+            background: rgba(24, 119, 242, 0.15);
+            border: 1px solid rgba(24, 119, 242, 0.4);
+            color: #6db0ff;
+        }
+
+        .btn-fb:hover {
+            background: #1877F2;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(24, 119, 242, 0.4);
+        }
+
+        .btn-tg {
+            background: rgba(0, 255, 102, 0.08);
+            border: 1px solid rgba(0, 255, 102, 0.35);
+            color: #00ff66;
+        }
+
+        .btn-tg:hover {
+            background: #00ff66;
+            color: #010703;
+            box-shadow: 0 0 18px #00ff66;
+        }
+
+        .server-section-title {
+            font-size: 13.5px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .server-section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 14px;
+            background: #00ff66;
+            border-radius: 2px;
+            box-shadow: 0 0 8px #00ff66;
+        }
+
+        .server-btn {
+            background: linear-gradient(135deg, #00220a, #004417);
+            color: #00ff66;
+            border: 1px solid #00ff66;
+            padding: 18px 20px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            width: 100%;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 0 20px rgba(0, 255, 42, .3), inset 0 0 10px rgba(0, 255, 102, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .server-btn:hover {
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.4);
+            transform: scale(1.005);
+        }
+
+        .badge-hd::after {
+            content: 'LIVE FHD';
+            background: linear-gradient(90deg, #00ff66, #00aa44);
+            color: #010703;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 8px #00ff66;
         }
     </style>
 </head>
+
 <body>
     <div class="app-container" onclick="attemptUnmute()">
         <div class="player-section">
@@ -150,13 +401,15 @@
         </div>
 
         <div class="content-section">
-            <div class="video-title">FIFA Live Stream — Premium FHD Ultra</div>
+            <div class="video-title">FIFA Live Stream FHD Presentation</div>
             
             <div class="meta-stats-row">
-                <div class="global-live-badge">Live Node</div>
+                <div class="global-live-badge">Live</div>
                 <div class="vjs-view-counter">
-                    <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                    <span id="liveViewerCount">54.8K</span> active streaming
+                    <svg viewBox="0 0 24 24" width="14" height="14">
+                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                    </svg>
+                    <span id="liveViewerCount">54.8K</span> views in last hour
                 </div>
             </div>
 
@@ -164,21 +417,21 @@
                 <div class="channel-info">
                     <div class="channel-avatar">NR</div>
                     <div>
-                        <div class="channel-name">Cyber Transmission 4K</div>
-                        <div class="channel-subs">Optimized by Nabil Reza</div>
+                        <div class="channel-name">4K Streaming Core</div>
+                        <div class="channel-subs">Streamed by Nabil Reza</div>
                     </div>
                 </div>
             </div>
 
             <div class="social-box">
-                <a href="https://www.facebook.com/profile.php?id=61551121126388" target="_blank" class="social-btn btn-fb">Follow Platform</a>
-                <a href="https://t.me/desperatecyberzone" target="_blank" class="social-btn btn-tg">Join Telegram HQ</a>
+                <a href="https://www.facebook.com/profile.php?id=61551121126388" target="_blank" class="social-btn btn-fb"> Follow FB </a>
+                <a href="https://t.me/desperatecyberzone" target="_blank" class="social-btn btn-tg"> Join Telegram </a>
             </div>
 
-            <div class="server-section-title">Select Transmission Core</div>
+            <div class="server-section-title">Select Transmission Node</div>
             <div class="server-box">
                 <button id="btn-0" class="server-btn badge-hd">
-                    <span>Premium Cyber Node (Main Server)</span>
+                    <span>Premium Cyber Node (Server 1)</span>
                 </button>
             </div>
         </div>
@@ -188,15 +441,27 @@
     <script>
         var globalPlayerInstance = null;
 
-        // Anti-DevTools Protection
-        const nukePage = () => { document.body.innerHTML = ''; document.head.innerHTML = ''; };
+        // Anti-DevTools Protection System
+        const nukePage = () => {
+            document.body.innerHTML = '';
+            document.head.innerHTML = '';
+        };
+        
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('keydown', e => {
             if (123 === e.keyCode || (e.ctrlKey && e.shiftKey && (73 === e.keyCode || 74 === e.keyCode || 67 === e.keyCode)) || (e.ctrlKey && 85 === e.keyCode)) {
-                e.preventDefault(); nukePage();
+                e.preventDefault();
+                nukePage();
             }
         });
-        setInterval(() => { const e = performance.now(); debugger; if (performance.now() - e > 100) nukePage(); }, 500);
+
+        setInterval(() => {
+            const e = performance.now();
+            debugger;
+            if (performance.now() - e > 100) {
+                nukePage();
+            }
+        }, 500);
 
         function attemptUnmute() {
             if (globalPlayerInstance) {
@@ -214,10 +479,10 @@
             globalPlayerInstance = player;
 
             player.ready(function () {
-                player.play().catch(e => console.log("Autoplay blocked:", e));
+                player.play().catch(e => console.log("Autoplay check:", e));
                 const t = document.getElementById('liveViewerCount');
                 if (t) {
-                    let baseViews = 50 + Math.floor(Math.random() * 15);
+                    let baseViews = 45 + Math.floor(Math.random() * 15);
                     let pointViews = Math.floor(Math.random() * 9);
                     t.innerText = baseViews + "." + pointViews + "K";
                 }
@@ -225,4 +490,5 @@
         });
     </script>
 </body>
+
 </html>
