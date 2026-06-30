@@ -6,60 +6,249 @@
     <title>FIFA Live Match Today — Premium Ultra 4K</title> 
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet"> 
     <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet"> 
     <style> 
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #010703; overflow-x: hidden; font-family: 'Hind Siliguri', 'Inter', sans-serif; color: #e2f7e7; } 
-        .app-container { display: flex; flex-direction: column; width: 100%; height: 100vh; } 
+        :root {
+            --bg-main: #060a07;
+            --bg-card: rgba(18, 28, 22, 0.45);
+            --border-color: rgba(0, 230, 118, 0.15);
+            --primary: #00E676;
+            --primary-glow: rgba(0, 230, 118, 0.35);
+            --text-muted: #94a99c;
+            --font-global: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+        }
+
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            background-color: var(--bg-main); 
+            background-image: radial-gradient(circle at 50% 0%, rgba(0, 230, 118, 0.08) 0%, transparent 70%);
+            overflow-x: hidden; 
+            font-family: var(--font-global); 
+            color: #f3f7f4; 
+            -webkit-font-smoothing: antialiased;
+        } 
+
+        .app-container { 
+            display: flex; 
+            flex-direction: column; 
+            width: 100%; 
+            height: 100vh; 
+        } 
+
         /* Video Player Area */ 
-        .player-section { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; box-shadow: 0 4px 30px rgba(0, 255, 102, 0.25); border-bottom: 2px solid #00ff66; } 
-        #vjs-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; } 
-        .video-js { width: 100% !important; height: 100% !important; background-color: transparent; } 
+        .player-section { 
+            position: relative; 
+            width: 100%; 
+            aspect-ratio: 16/9; 
+            background: #000; 
+            border-bottom: 1px solid rgba(0, 230, 118, 0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        } 
+
+        #vjs-wrapper { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; 
+        } 
+
+        .video-js { 
+            width: 100% !important; height: 100% !important; background-color: transparent; 
+        } 
+
         .video-js .vjs-big-play-button { display: none !important; } 
+
         /* Content Area */ 
-        .content-section { flex: 1; overflow-y: auto; padding: 20px; box-sizing: border-box; background: linear-gradient(to bottom, #010703, #031409); } 
-        .video-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; text-shadow: 0 0 15px rgba(0, 255, 102, 0.4); line-height: 1.4; } 
-        /* VideoJS Control Bar - Cyberpunk Theme */ 
-        .video-js .vjs-control-bar { background: rgba(1, 7, 3, 0.9) !important; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(0, 255, 102, 0.4) !important; border-radius: 14px !important; bottom: 10px !important; left: 50% !important; transform: translateX(-50%) !important; width: calc(100% - 20px) !important; height: 48px !important; display: flex !important; align-items: center !important; padding: 0 10px !important; box-shadow: 0 0 25px rgba(0, 255, 102, .35) !important; opacity: 1 !important; } 
-        .video-js .vjs-button { width: 38px !important; height: 38px !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 50% !important; margin: 0 3px !important; background: transparent !important; color: #00ff66 !important; cursor: pointer; } 
-        .video-js .vjs-button:hover { background: rgba(0, 255, 102, 0.2) !important; text-shadow: 0 0 10px #00ff66; } 
-        .video-js .vjs-icon-placeholder:before { font-size: 1.6em !important; line-height: 1 !important; display: flex; align-items: center; justify-content: center; color: #00ff66 !important; } 
-        .video-js .vjs-volume-panel { display: flex !important; align-items: center !important; width: auto !important; } 
+        .content-section { 
+            flex: 1; 
+            overflow-y: auto; 
+            padding: 24px; 
+            box-sizing: border-box; 
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        } 
+
+        .video-title { 
+            font-size: 22px; 
+            font-weight: 800; 
+            color: #fff; 
+            margin-bottom: 8px; 
+            letter-spacing: -0.3px;
+            line-height: 1.3; 
+        } 
+
+        /* VideoJS Control Bar - World Class Minimal Glassmorphism */ 
+        .video-js .vjs-control-bar { 
+            background: rgba(10, 18, 13, 0.75) !important; 
+            backdrop-filter: blur(25px) saturate(180%); 
+            -webkit-backdrop-filter: blur(25px) saturate(180%); 
+            border: 1px solid rgba(255, 255, 255, 0.08) !important; 
+            border-radius: 16px !important; 
+            bottom: 16px !important; 
+            left: 16px !important; 
+            width: calc(100% - 32px) !important; 
+            height: 52px !important; 
+            display: flex !important; 
+            align-items: center !important; 
+            padding: 0 8px !important; 
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4) !important; 
+            transition: opacity 0.3s ease;
+        } 
+
+        .video-js .vjs-button { 
+            width: 40px !important; height: 40px !important; 
+            display: flex !important; align-items: center !important; justify-content: center !important; 
+            border-radius: 12px !important; 
+            margin: 0 2px !important; 
+            color: #fff !important; 
+            transition: all 0.2s ease !important;
+        } 
+
+        .video-js .vjs-button:hover { 
+            background: rgba(255, 255, 255, 0.1) !important; 
+            color: var(--primary) !important;
+        } 
+
+        .video-js .vjs-icon-placeholder:before { 
+            font-size: 1.8em !important; line-height: 1 !important; 
+            display: flex; align-items: center; justify-content: center; 
+        } 
+
+        .video-js .vjs-volume-panel { display: flex !important; align-items: center !important; } 
         .video-js .vjs-picture-in-picture-control { margin-left: auto !important; } 
         .video-js .vjs-live-control, .video-js .vjs-live-display, .vjs-current-time, .vjs-duration, .vjs-remaining-time, .vjs-time-divider { display: none !important; } 
+
         /* Progress Bar */ 
-        .video-js .vjs-progress-control { display: flex !important; flex: auto; align-items: center; margin: 0 10px; } 
-        .video-js .vjs-progress-holder { height: 5px; border-radius: 3px; background: rgba(0, 255, 102, 0.15); } 
-        .video-js .vjs-play-progress { background-color: #00ff66 !important; border-radius: 3px; box-shadow: 0 0 12px #00ff66; } 
-        .video-js .vjs-play-progress:before { font-size: 12px; top: -3px; color: #00ff66; text-shadow: 0 0 6px #00ff66; } 
-        .video-js .vjs-load-progress, .video-js .vjs-load-progress div { background: rgba(255, 255, 255, 0.1) !important; border-radius: 3px; } 
+        .video-js .vjs-progress-control { display: flex !important; align-items: center; margin: 0 12px; } 
+        .video-js .vjs-progress-holder { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.15); } 
+        .video-js .vjs-play-progress { background-color: var(--primary) !important; border-radius: 2px; } 
+        .video-js .vjs-play-progress:before { display: none; } 
+        .video-js .vjs-load-progress, .video-js .vjs-load-progress div { background: rgba(255, 255, 255, 0.08) !important; border-radius: 2px; } 
+
         /* Stats Card UI */ 
-        .meta-stats-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 18px 0; font-size: 13.5px; color: #a3c2ab; } 
-        .global-live-badge { background: rgba(0, 255, 102, 0.12); border: 1px solid rgba(0, 255, 102, 0.5); border-radius: 6px; padding: 4px 10px; font-weight: 700; letter-spacing: .7px; color: #00ff66; text-transform: uppercase; display: flex; align-items: center; text-shadow: 0 0 8px rgba(0, 255, 102, 0.6); } 
-        .global-live-badge::before { content: ''; display: inline-block; width: 6px; height: 6px; background-color: #00ff66; border-radius: 50%; margin-right: 6px; box-shadow: 0 0 10px #00ff66; animation: pulse-dot 1.5s infinite; } 
-        .vjs-view-counter { display: flex; align-items: center; color: #00ff66; font-weight: 600; background: rgba(0, 255, 102, 0.04); border: 1px solid rgba(0, 255, 102, 0.1); padding: 4px 12px; border-radius: 6px; } 
-        .vjs-view-counter svg { margin-right: 6px; fill: #00ff66; } 
-        @keyframes pulse-dot { 0% { transform: scale(.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, .7) } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 255, 102, 0) } 100% { transform: scale(.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0) } } 
+        .meta-stats-row { 
+            display: flex; align-items: center; gap: 10px; margin: 16px 0 24px 0; font-size: 13px; color: var(--text-muted); 
+        } 
+
+        .global-live-badge { 
+            background: rgba(0, 230, 118, 0.1); 
+            border: 1px solid rgba(0, 230, 118, 0.3); 
+            border-radius: 6px; padding: 4px 10px; 
+            font-weight: 700; letter-spacing: .5px; color: var(--primary); 
+            text-transform: uppercase; display: flex; align-items: center; 
+        } 
+
+        .global-live-badge::before { 
+            content: ''; display: inline-block; width: 6px; height: 6px; 
+            background-color: var(--primary); border-radius: 50%; margin-right: 6px; 
+            box-shadow: 0 0 10px var(--primary); animation: pulse-dot 1.8s infinite; 
+        } 
+
+        .vjs-view-counter { 
+            display: flex; align-items: center; color: #fff; font-weight: 600; 
+            background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.06); 
+            padding: 4px 12px; border-radius: 6px; 
+        } 
+
+        .vjs-view-counter svg { margin-right: 6px; fill: var(--primary); } 
+
+        @keyframes pulse-dot { 
+            0% { transform: scale(.9); opacity: 0.6; } 
+            50% { transform: scale(1.1); opacity: 1; } 
+            100% { transform: scale(.9); opacity: 0.6; } 
+        } 
+
         /* Channel Row */ 
-        .channel-row { display: flex; align-items: center; justify-content: space-between; padding: 14px; background: rgba(0, 34, 10, 0.2); border: 1px solid rgba(0, 255, 102, 0.15); border-radius: 14px; margin-bottom: 18px; } 
-        .channel-info { display: flex; align-items: center; gap: 12px; } 
-        .channel-avatar { width: 42px; height: 42px; background: linear-gradient(135deg, #00ff66, #00220a); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; border: 1px solid #00ff66; box-shadow: 0 0 12px rgba(0, 255, 102, 0.4); font-size: 16px; } 
-        .channel-name { font-size: 16px; font-weight: 600; color: #fff; } 
-        .channel-subs { font-size: 12.5px; color: #a3c2ab; } 
+        .channel-row { 
+            display: flex; align-items: center; justify-content: space-between; 
+            padding: 16px; background: var(--bg-card); 
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color); border-radius: 16px; margin-bottom: 20px; 
+        } 
+
+        .channel-info { display: flex; align-items: center; gap: 14px; } 
+        .channel-avatar { 
+            width: 44px; height: 44px; 
+            background: linear-gradient(135deg, var(--primary), #007b3e); 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-weight: 800; color: #fff; font-size: 15px; 
+            box-shadow: 0 4px 14px rgba(0, 230, 118, 0.2);
+        } 
+        .channel-name { font-size: 15px; font-weight: 700; color: #fff; } 
+        .channel-subs { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; } 
+
         /* Social Buttons */ 
-        .social-box { display: flex; gap: 12px; margin-bottom: 20px; } 
-        .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 600; color: #fff; text-decoration: none; transition: .3s ease; } 
-        .btn-fb { background: rgba(24, 119, 242, 0.15); border: 1px solid rgba(24, 119, 242, 0.4); color: #6db0ff; } 
-        .btn-fb:hover { background: #1877F2; color: #fff; box-shadow: 0 0 15px rgba(24, 119, 242, 0.4); } 
-        .btn-tg { background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.35); color: #00ff66; } 
-        .btn-tg:hover { background: #00ff66; color: #010703; box-shadow: 0 0 18px #00ff66; } 
-        /* Dynamic Transmission Nodes */ 
-        .server-section-title { font-size: 13.5px; font-weight: 600; margin-bottom: 12px; color: #fff; text-transform: uppercase; letter-spacing: 0.8px; display: flex; align-items: center; gap: 6px; } 
-        .server-section-title::before { content: ''; display: inline-block; width: 4px; height: 14px; background: #00ff66; border-radius: 2px; box-shadow: 0 0 8px #00ff66; } 
+        .social-box { display: flex; gap: 12px; margin-bottom: 28px; } 
+        .social-btn { 
+            flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; 
+            padding: 14px; border-radius: 14px; font-size: 14px; font-weight: 700; 
+            text-decoration: none; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
+        } 
+
+        .btn-fb { 
+            background: rgba(24, 119, 242, 0.08); border: 1px solid rgba(24, 119, 242, 0.25); color: #4da3ff; 
+        } 
+        .btn-fb:hover { 
+            background: #1877F2; color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(24, 119, 242, 0.3); 
+        } 
+
+        .btn-tg { 
+            background: rgba(0, 230, 118, 0.05); border: 1px solid rgba(0, 230, 118, 0.25); color: var(--primary); 
+        } 
+        .btn-tg:hover { 
+            background: var(--primary); color: #040805; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 230, 118, 0.3); 
+        } 
+
+        /* Transmission Nodes */ 
+        .server-section-title { 
+            font-size: 12px; font-weight: 800; margin-bottom: 14px; color: #fff; 
+            text-transform: uppercase; letter-spacing: 1.2px; display: flex; align-items: center; gap: 8px; 
+            opacity: 0.9;
+        } 
+        .server-section-title::before { 
+            content: ''; display: inline-block; width: 3px; height: 12px; background: var(--primary); border-radius: 2px; 
+        } 
+
         .server-box { display: flex; flex-direction: column; gap: 12px; } 
-        .server-btn { background: linear-gradient(135deg, #001a08, #002e10); color: #8eeebb; border: 1px solid rgba(0, 255, 102, 0.3); padding: 16px 20px; border-radius: 14px; font-size: 14.5px; font-weight: 700; width: 100%; text-align: left; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.3s ease; } 
-        .server-btn:hover, .server-btn.active { background: linear-gradient(135deg, #00220a, #004417); color: #00ff66; border: 1px solid #00ff66; box-shadow: 0 0 20px rgba(0, 255, 42, .3); } 
-        .badge-fhd::after { content: '1080P FHD'; background: linear-gradient(90deg, #00ff66, #00aa44); color: #010703; font-size: 9.5px; font-weight: 800; padding: 4px 8px; border-radius: 5px; box-shadow: 0 0 8px #00ff66; } 
+        .server-btn { 
+            background: rgba(255, 255, 255, 0.02); 
+            color: #d1ebd9; border: 1px solid rgba(255, 255, 255, 0.06); 
+            padding: 18px 20px; border-radius: 16px; font-size: 14.5px; font-weight: 700; 
+            width: 100%; text-align: left; display: flex; align-items: center; 
+            justify-content: space-between; cursor: pointer; 
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
+        } 
+
+        .server-btn:hover {
+            background: rgba(0, 230, 118, 0.03);
+            border-color: rgba(0, 230, 118, 0.4);
+            color: #fff;
+        }
+
+        .server-btn.active { 
+            background: rgba(0, 230, 118, 0.08); 
+            color: var(--primary); 
+            border-color: var(--primary); 
+            box-shadow: inset 0 0 12px rgba(0, 230, 118, 0.05);
+        } 
+
+        .badge-fhd::after { 
+            content: '1080P FHD'; 
+            background: #fff;
+            color: #000; 
+            font-size: 9px; font-weight: 800; padding: 4px 8px; border-radius: 6px; 
+            letter-spacing: 0.3px;
+        }
+        .server-btn.active.badge-fhd::after {
+            background: var(--primary);
+            color: #040805;
+        }
+
+        /* Desktop Layout Optimization */
+        @media (min-width: 992px) {
+            .app-container { flex-direction: row; height: 100vh; overflow: hidden; }
+            .player-section { flex: 1.6; height: 100vh; aspect-ratio: auto; border-bottom: none; border-right: 1px solid rgba(0, 230, 118, 0.15); }
+            .content-section { flex: 1; height: 100vh; overflow-y: auto; padding: 40px 32px; max-width: 100%; }
+        }
     </style>
 </head>
 <body> 
@@ -76,14 +265,13 @@
             <div class="meta-stats-row"> 
                 <div class="global-live-badge">Live</div> 
                 <div class="vjs-view-counter"> 
-                    <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg> 
-                    <span id="liveViewerCount">62.4K</span> views in last hour 
+                    <svg viewBox="0 0 24 24" width="13" height="13"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg> 
+                    <span id="liveViewerCount">62.4K</span> &nbsp;watching now
                 </div> 
             </div> 
             <div class="channel-row"> 
                 <div class="channel-info"> 
-                    <div class="channel-avatar">NR</div> 
-                    <div> 
+                    <div class="channel-avatar">NR</div> <div> 
                         <div class="channel-name">Nabil Reza Official Stream</div> 
                         <div class="channel-subs">High Quality Edge Routing Network</div> 
                     </div> 
@@ -104,15 +292,23 @@
     <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script> 
     <script> 
         var globalPlayerInstance = null; 
-        // Anti-DevTools Protection 
         const nukePage = () => { document.body.innerHTML = ''; document.head.innerHTML = ''; }; 
         document.addEventListener('contextmenu', e => e.preventDefault()); 
         document.addEventListener('keydown', e => { if (123 === e.keyCode || (e.ctrlKey && e.shiftKey && (73 === e.keyCode || 74 === e.keyCode || 67 === e.keyCode)) || (e.ctrlKey && 85 === e.keyCode)) { e.preventDefault(); nukePage(); } }); 
         setInterval(() => { const e = performance.now(); debugger; if (performance.now() - e > 100) nukePage(); }, 500); 
+
         function attemptUnmute() { if (globalPlayerInstance) { try { globalPlayerInstance.muted(false); } catch (e) {} } } 
-        // Dynamic Stream Switcher Logic 
-        function switchStream(url, element) { if (globalPlayerInstance) { globalPlayerInstance.src({ src: url, type: 'application/x-mpegURL' }); globalPlayerInstance.play().catch(e => console.log("Stream play error:", e)); /* Active Button UI Class Switcher */ document.querySelectorAll('.server-btn').forEach(btn => btn.classList.remove('active')); element.classList.add('active'); } } 
-        window.addEventListener('load', function () { var player = videojs('live-player', { html5: { vhs: { overrideNative: !0, allowCrossfileNaming: !0 } }, muted: !0, autoplay: 'any', controlBar: { children: ['playToggle', 'volumePanel', 'progressControl', 'fullscreenToggle'] } }); globalPlayerInstance = player; player.ready(function () { player.play().catch(e => console.log("Autoplay check:", e)); const t = document.getElementById('liveViewerCount'); if (t) { let baseViews = 55 + Math.floor(Math.random() * 15); let pointViews = Math.floor(Math.random() * 9); t.innerText = baseViews + "." + pointViews + "K"; } }); }); 
+        function switchStream(url, element) { if (globalPlayerInstance) { globalPlayerInstance.src({ src: url, type: 'application/x-mpegURL' }); globalPlayerInstance.play().catch(e => console.log("Stream play error:", e)); document.querySelectorAll('.server-btn').forEach(btn => btn.classList.remove('active')); element.classList.add('active'); } } 
+        
+        window.addEventListener('load', function () { 
+            var player = videojs('live-player', { html5: { vhs: { overrideNative: !0, allowCrossfileNaming: !0 } }, muted: !0, autoplay: 'any', controlBar: { children: ['playToggle', 'volumePanel', 'progressControl', 'fullscreenToggle'] } }); 
+            globalPlayerInstance = player; 
+            player.ready(function () { 
+                player.play().catch(e => console.log("Autoplay check:", e)); 
+                const t = document.getElementById('liveViewerCount'); 
+                if (t) { let baseViews = 55 + Math.floor(Math.random() * 15); let pointViews = Math.floor(Math.random() * 9); t.innerText = baseViews + "." + pointViews + "K"; } 
+            }); 
+        }); 
     </script>
 </body> 
 </html>
