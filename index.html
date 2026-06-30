@@ -1,1 +1,156 @@
-<!DOCTYPE html><html lang="en"><head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>FIFA Live Match Today — Premium Ultra 4K</title> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Hind+Siliguri:wght@500;700&display=swap" rel="stylesheet"> <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet"> <style> :root { --bg-dark: #030805; --panel-bg: rgba(9, 21, 14, 0.65); --accent: #00FF66; --accent-glow: rgba(0, 255, 102, 0.4); --text-bright: #FFFFFF; --text-muted: #8AA093; --border-glow: rgba(0, 255, 102, 0.2); } body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: var(--bg-dark); background-image: radial-gradient(circle at 50% -20%, rgba(0, 255, 102, 0.15) 0%, transparent 60%), linear-gradient(180deg, #030805 0%, #010402 100%); overflow-x: hidden; font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif; color: var(--text-bright); -webkit-font-smoothing: antialiased; } .app-container { display: flex; flex-direction: column; width: 100%; height: 100vh; } /* 4K Cinematic Player Area */ .player-section { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 255, 102, 0.1); border-bottom: 2px solid rgba(0, 255, 102, 0.3); } #vjs-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; } .video-js { width: 100% !important; height: 100% !important; background-color: transparent; } .video-js .vjs-big-play-button { display: none !important; } /* Floating Premium Control Bar */ .video-js .vjs-control-bar { background: rgba(3, 10, 6, 0.8) !important; backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); border: 1px solid rgba(0, 255, 102, 0.3) !important; border-radius: 16px !important; bottom: 16px !important; left: 50% !important; transform: translateX(-50%) !important; width: calc(100% - 32px) !important; height: 52px !important; display: flex !important; align-items: center !important; padding: 0 12px !important; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 102, 0.15) !important; } .video-js .vjs-button { width: 40px !important; height: 40px !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 12px !important; margin: 0 3px !important; color: var(--accent) !important; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important; } .video-js .vjs-button:hover { background: rgba(0, 255, 102, 0.15) !important; text-shadow: 0 0 10px var(--accent); } .video-js .vjs-icon-placeholder:before { font-size: 1.7em !important; line-height: 1 !important; display: flex; align-items: center; justify-content: center; color: var(--accent) !important; } .video-js .vjs-volume-panel { display: flex !important; align-items: center !important; } .video-js .vjs-picture-in-picture-control { margin-left: auto !important; } .video-js .vjs-live-control, .video-js .vjs-live-display, .vjs-current-time, .vjs-duration, .vjs-remaining-time, .vjs-time-divider { display: none !important; } /* Custom High-Contrast Progress Bar */ .video-js .vjs-progress-control { display: flex !important; align-items: center; margin: 0 14px; } .video-js .vjs-progress-holder { height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.12); } .video-js .vjs-play-progress { background: linear-gradient(90deg, #00FF66, #00FFCC) !important; border-radius: 3px; box-shadow: 0 0 12px var(--accent); } .video-js .vjs-play-progress:before { display: none; } .video-js .vjs-load-progress, .video-js .vjs-load-progress div { background: rgba(255, 255, 255, 0.08) !important; border-radius: 3px; } /* Content Body Optimization */ .content-section { flex: 1; overflow-y: auto; padding: 24px; box-sizing: border-box; max-width: 780px; margin: 0 auto; width: 100%; } .video-title { font-size: 24px; font-weight: 800; color: var(--text-bright); margin-bottom: 10px; line-height: 1.3; letter-spacing: -0.4px; text-shadow: 0 2px 4px rgba(0,0,0,0.4); } /* Badges & Stats UI */ .meta-stats-row { display: flex; align-items: center; gap: 12px; margin: 16px 0 24px 0; font-size: 13.5px; } .global-live-badge { background: rgba(0, 255, 102, 0.12); border: 1px solid var(--accent); border-radius: 8px; padding: 5px 12px; font-weight: 800; letter-spacing: .8px; color: var(--accent); text-transform: uppercase; display: flex; align-items: center; box-shadow: 0 0 15px rgba(0, 255, 102, 0.2); } .global-live-badge::before { content: ''; display: inline-block; width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; margin-right: 8px; box-shadow: 0 0 10px var(--accent); animation: pulse-dot 1.4s infinite; } .vjs-view-counter { display: flex; align-items: center; color: var(--text-bright); font-weight: 700; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 5px 14px; border-radius: 8px; } .vjs-view-counter svg { margin-right: 8px; fill: var(--accent); filter: drop-shadow(0 0 4px var(--accent)); } @keyframes pulse-dot { 0% { transform: scale(.9); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(.9); opacity: 0.5; } } /* Premium Cards UI */ .channel-row { display: flex; align-items: center; justify-content: space-between; padding: 18px; background: var(--panel-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--border-glow); border-radius: 20px; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); } .channel-info { display: flex; align-items: center; gap: 16px; } .channel-avatar { width: 48px; height: 48px; background: linear-gradient(135deg, var(--accent), #005522); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; border: 1px solid rgba(0, 255, 102, 0.4); box-shadow: 0 4px 15px rgba(0, 255, 102, 0.25); font-size: 16px; } .channel-name { font-size: 16px; font-weight: 700; color: #fff; } .channel-subs { font-size: 13px; color: var(--text-muted); margin-top: 3px; } /* High Contrast Vibrant Buttons */ .social-box { display: flex; gap: 14px; margin-bottom: 28px; } .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px; border-radius: 16px; font-size: 15px; font-weight: 700; color: #fff; text-decoration: none; transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); } .btn-fb { background: linear-gradient(135deg, rgba(24, 119, 242, 0.2), rgba(24, 119, 242, 0.05)); border: 1px solid rgba(24, 119, 242, 0.5); color: #7cb5ff; } .btn-fb:hover { background: #1877F2; color: #fff; box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4); transform: translateY(-2px); } .btn-tg { background: linear-gradient(135deg, rgba(0, 255, 102, 0.15), rgba(0, 255, 102, 0.02)); border: 1px solid var(--accent); color: var(--accent); } .btn-tg:hover { background: var(--accent); color: #020603; box-shadow: 0 8px 25px rgba(0, 255, 102, 0.35); transform: translateY(-2px); font-weight: 800; } /* Transmission Nodes */ .server-section-title { font-size: 13px; font-weight: 800; margin-bottom: 14px; color: var(--text-bright); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; } .server-section-title::before { content: ''; display: inline-block; width: 4px; height: 14px; background: var(--accent); border-radius: 2px; box-shadow: 0 0 10px var(--accent); } .server-box { display: flex; flex-direction: column; gap: 14px; } .server-btn { background: linear-gradient(135deg, rgba(9, 21, 14, 0.6), rgba(4, 10, 6, 0.4)); border: 1px solid rgba(0, 255, 102, 0.15); padding: 20px; border-radius: 18px; color: #CDE2D6; font-size: 15px; font-weight: 700; width: 100%; text-align: left; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); } .server-btn:hover { border-color: rgba(0, 255, 102, 0.5); color: #fff; background: rgba(0, 255, 102, 0.03); transform: scale(1.01); } .server-btn.active { background: linear-gradient(135deg, rgba(0, 255, 102, 0.12), rgba(0, 34, 14, 0.4)); color: var(--accent); border-color: var(--accent); box-shadow: 0 0 20px rgba(0, 255, 102, 0.15), inset 0 0 15px rgba(0, 255, 102, 0.05); } .badge-fhd::after { content: '1080P FHD'; background: rgba(255, 255, 255, 0.1); color: #FFF; border: 1px solid rgba(255, 255, 255, 0.2); font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 8px; transition: all 0.2s; } .server-btn.active.badge-fhd::after { background: var(--accent); color: #020603; border-color: var(--accent); box-shadow: 0 0 10px var(--accent); } /* Desktop Layout Sync */ @media (min-width: 992px) { .app-container { flex-direction: row; height: 100vh; overflow: hidden; } .player-section { flex: 1.6; height: 100vh; aspect-ratio: auto; border-bottom: none; border-right: 2px solid rgba(0, 255, 102, 0.2); } .content-section { flex: 1; height: 100vh; overflow-y: auto; padding: 40px 32px; max-width: 100%; background: linear-gradient(135deg, #030805 0%, #010402 100%); } } </style></head><body> <div class="app-container" onclick="attemptUnmute()"> <div class="player-section"> <div id="vjs-wrapper"> <video id="live-player" class="video-js vjs-default-skin" controls autoplay muted playsinline preload="metadata"> <source src="https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1750.m3u8?hdntl=Expires=1782840485~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclC0uaUD73C5ioeXBuP0KQMiPascuZsxuBTSptw2XJObY_EOhdDMuAf-SEpA-2Gvu0BSh1oStm4smvxA70eui14P" type="application/x-mpegURL"> </video> </div> </div> <div class="content-section"> <div class="video-title">FIFA Live Match Today — Premium Ultra 4K</div> <div class="meta-stats-row"> <div class="global-live-badge">Live</div> <div class="vjs-view-counter"> <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg> <span id="liveViewerCount">62.4K</span> &nbsp;Live Viewers </div> </div> <div class="channel-row"> <div class="channel-info"> <div class="channel-avatar">NR</div> <div> <div class="channel-name">Nabil Reza Official Stream</div> <div class="channel-subs">High Quality Edge Routing Network</div> </div> </div> </div> <div class="social-box"> <a href="https://www.facebook.com/profile.php?id=61551121126388" target="_blank" class="social-btn btn-fb">Follow FB</a> <a href="https://t.me/desperatecyberzone" target="_blank" class="social-btn btn-tg">Join Telegram</a> </div> <div class="server-section-title">Select Transmission Node</div> <div class="server-box"> <button class="server-btn badge-fhd active" onclick="switchStream('https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1750.m3u8?hdntl=Expires=1782840485~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclC0uaUD73C5ioeXBuP0KQMiPascuZsxuBTSptw2XJObY_EOhdDMuAf-SEpA-2Gvu0BSh1oStm4smvxA70eui14P', this)"> <span>⚡ Server 1: Ultra Stream (No Buffer)</span> </button> </div> </div> </div> <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script> <script> var globalPlayerInstance = null; const nukePage = () => { document.body.innerHTML = ''; document.head.innerHTML = ''; }; document.addEventListener('contextmenu', e => e.preventDefault()); document.addEventListener('keydown', e => { if (123 === e.keyCode || (e.ctrlKey && e.shiftKey && (73 === e.keyCode || 74 === e.keyCode || 67 === e.keyCode)) || (e.ctrlKey && 85 === e.keyCode)) { e.preventDefault(); nukePage(); } }); setInterval(() => { const e = performance.now(); debugger; if (performance.now() - e > 100) nukePage(); }, 500); function attemptUnmute() { if (globalPlayerInstance) { try { globalPlayerInstance.muted(false); } catch (e) {} } } function switchStream(url, element) { if (globalPlayerInstance) { globalPlayerInstance.src({ src: url, type: 'application/x-mpegURL' }); globalPlayerInstance.play().catch(e => console.log("Stream play error:", e)); document.querySelectorAll('.server-btn').forEach(btn => btn.classList.remove('active')); element.classList.add('active'); } } window.addEventListener('load', function () { var player = videojs('live-player', { html5: { vhs: { overrideNative: !0, allowCrossfileNaming: !0 } }, muted: !0, autoplay: 'any', controlBar: { children: ['playToggle', 'volumePanel', 'progressControl', 'fullscreenToggle'] } }); globalPlayerInstance = player; player.ready(function () { player.play().catch(e => console.log("Autoplay check:", e)); const t = document.getElementById('liveViewerCount'); if (t) { let baseViews = 55 + Math.floor(Math.random() * 15); let pointViews = Math.floor(Math.random() * 9); t.innerText = baseViews + "." + pointViews + "K"; } }); }); </script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFA Live Match Today — Premium Ultra 4K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Hind+Siliguri:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #030805;
+            --panel-bg: rgba(9, 21, 14, 0.65);
+            --accent: #00FF66;
+            --accent-glow: rgba(0, 255, 102, 0.4);
+            --text-bright: #FFFFFF;
+            --text-muted: #8AA093;
+            --border-glow: rgba(0, 255, 102, 0.2);
+        }
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at 50% -20%, rgba(0, 255, 102, 0.15) 0%, transparent 60%), linear-gradient(180deg, #030805 0%, #010402 100%);
+            overflow-x: hidden; font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif; color: var(--text-bright);
+            -webkit-font-smoothing: antialiased;
+        }
+        .app-container { display: flex; flex-direction: column; width: 100%; height: 100vh; }
+        .player-section { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 255, 102, 0.1); border-bottom: 2px solid rgba(0, 255, 102, 0.3); }
+        #vjs-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; }
+        .video-js { width: 100% !important; height: 100% !important; background-color: transparent; }
+        .video-js .vjs-big-play-button { display: none !important; }
+        .video-js .vjs-control-bar { background: rgba(3, 10, 6, 0.8) !important; backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); border: 1px solid rgba(0, 255, 102, 0.3) !important; border-radius: 16px !important; bottom: 16px !important; left: 50% !important; transform: translateX(-50%) !important; width: calc(100% - 32px) !important; height: 52px !important; display: flex !important; align-items: center !important; padding: 0 12px !important; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 102, 0.15) !important; }
+        .video-js .vjs-button { width: 40px !important; height: 40px !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 12px !important; margin: 0 3px !important; color: var(--accent) !important; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important; }
+        .video-js .vjs-button:hover { background: rgba(0, 255, 102, 0.15) !important; text-shadow: 0 0 10px var(--accent); }
+        .video-js .vjs-icon-placeholder:before { font-size: 1.7em !important; line-height: 1 !important; display: flex; align-items: center; justify-content: center; color: var(--accent) !important; }
+        .video-js .vjs-volume-panel { display: flex !important; align-items: center !important; }
+        .video-js .vjs-picture-in-picture-control { margin-left: auto !important; }
+        .video-js .vjs-live-control, .video-js .vjs-live-display, .vjs-current-time, .vjs-duration, .vjs-remaining-time, .vjs-time-divider { display: none !important; }
+        .video-js .vjs-progress-control { display: flex !important; align-items: center; margin: 0 14px; }
+        .video-js .vjs-progress-holder { height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.12); }
+        .video-js .vjs-play-progress { background: linear-gradient(90deg, #00FF66, #00FFCC) !important; border-radius: 3px; box-shadow: 0 0 12px var(--accent); }
+        .video-js .vjs-play-progress:before { display: none; }
+        .video-js .vjs-load-progress, .video-js .vjs-load-progress div { background: rgba(255, 255, 255, 0.08) !important; border-radius: 3px; }
+        .content-section { flex: 1; overflow-y: auto; padding: 24px; box-sizing: border-box; max-width: 780px; margin: 0 auto; width: 100%; }
+        .video-title { font-size: 24px; font-weight: 800; color: var(--text-bright); margin-bottom: 10px; line-height: 1.3; letter-spacing: -0.4px; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+        .meta-stats-row { display: flex; align-items: center; gap: 12px; margin: 16px 0 24px 0; font-size: 13.5px; }
+        .global-live-badge { background: rgba(0, 255, 102, 0.12); border: 1px solid var(--accent); border-radius: 8px; padding: 5px 12px; font-weight: 800; letter-spacing: .8px; color: var(--accent); text-transform: uppercase; display: flex; align-items: center; box-shadow: 0 0 15px rgba(0, 255, 102, 0.2); }
+        .global-live-badge::before { content: ''; display: inline-block; width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; margin-right: 8px; box-shadow: 0 0 10px var(--accent); animation: pulse-dot 1.4s infinite; }
+        .vjs-view-counter { display: flex; align-items: center; color: var(--text-bright); font-weight: 700; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 5px 14px; border-radius: 8px; }
+        .vjs-view-counter svg { margin-right: 8px; fill: var(--accent); filter: drop-shadow(0 0 4px var(--accent)); }
+        @keyframes pulse-dot { 0% { transform: scale(.9); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(.9); opacity: 0.5; } }
+        .channel-row { display: flex; align-items: center; justify-content: space-between; padding: 18px; background: var(--panel-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--border-glow); border-radius: 20px; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+        .channel-info { display: flex; align-items: center; gap: 16px; }
+        .channel-avatar { width: 48px; height: 48px; background: linear-gradient(135deg, var(--accent), #005522); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; border: 1px solid rgba(0, 255, 102, 0.4); box-shadow: 0 4px 15px rgba(0, 255, 102, 0.25); font-size: 16px; }
+        .channel-name { font-size: 16px; font-weight: 700; color: #fff; }
+        .channel-subs { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
+        .social-box { display: flex; gap: 14px; margin-bottom: 28px; }
+        .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px; border-radius: 16px; font-size: 15px; font-weight: 700; color: #fff; text-decoration: none; transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .btn-fb { background: linear-gradient(135deg, rgba(24, 119, 242, 0.2), rgba(24, 119, 242, 0.05)); border: 1px solid rgba(24, 119, 242, 0.5); color: #7cb5ff; }
+        .btn-fb:hover { background: #1877F2; color: #fff; box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4); transform: translateY(-2px); }
+        .btn-tg { background: linear-gradient(135deg, rgba(0, 255, 102, 0.15), rgba(0, 255, 102, 0.02)); border: 1px solid var(--accent); color: var(--accent); }
+        .btn-tg:hover { background: var(--accent); color: #020603; box-shadow: 0 8px 25px rgba(0, 255, 102, 0.35); transform: translateY(-2px); font-weight: 800; }
+        .server-section-title { font-size: 13px; font-weight: 800; margin-bottom: 14px; color: var(--text-bright); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .server-section-title::before { content: ''; display: inline-block; width: 4px; height: 14px; background: var(--accent); border-radius: 2px; box-shadow: 0 0 10px var(--accent); }
+        .server-box { display: flex; flex-direction: column; gap: 14px; }
+        .server-btn { background: linear-gradient(135deg, rgba(9, 21, 14, 0.6), rgba(4, 10, 6, 0.4)); border: 1px solid rgba(0, 255, 102, 0.15); padding: 20px; border-radius: 18px; color: #CDE2D6; font-size: 15px; font-weight: 700; width: 100%; text-align: left; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .server-btn:hover { border-color: rgba(0, 255, 102, 0.5); color: #fff; background: rgba(0, 255, 102, 0.03); transform: scale(1.01); }
+        .server-btn.active { background: linear-gradient(135deg, rgba(0, 255, 102, 0.12), rgba(0, 34, 14, 0.4)); color: var(--accent); border-color: var(--accent); box-shadow: 0 0 20px rgba(0, 255, 102, 0.15), inset 0 0 15px rgba(0, 255, 102, 0.05); }
+        .badge-fhd::after { content: '1080P FHD'; background: rgba(255, 255, 255, 0.1); color: #FFF; border: 1px solid rgba(255, 255, 255, 0.2); font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 8px; transition: all 0.2s; }
+        .server-btn.active.badge-fhd::after { background: var(--accent); color: #020603; border-color: var(--accent); box-shadow: 0 0 10px var(--accent); }
+        @media (min-width: 992px) {
+            .app-container { flex-direction: row; height: 100vh; overflow: hidden; }
+            .player-section { flex: 1.6; height: 100vh; aspect-ratio: auto; border-bottom: none; border-right: 2px solid rgba(0, 255, 102, 0.2); }
+            .content-section { flex: 1; height: 100vh; overflow-y: auto; padding: 40px 32px; max-width: 100%; background: linear-gradient(135deg, #030805 0%, #010402 100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container" onclick="attemptUnmute()">
+        <div class="player-section">
+            <div id="vjs-wrapper">
+                <video id="live-player" class="video-js vjs-default-skin" controls autoplay muted playsinline preload="metadata">
+                    <source src="https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1782924250~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclBqwZp0SAOB2OCxO_9fL9UrwMyo2g2XlvPGKtvjq6depqLoVLcp8PhNHVNqab5XP4nAno7LKWhZQMMRwu8XXzQO" type="application/x-mpegURL">
+                </video>
+            </div>
+        </div>
+        <div class="content-section">
+            <div class="video-title">FIFA Live Match Today — Premium Ultra 4K</div>
+            <div class="meta-stats-row">
+                <div class="global-live-badge">Live</div>
+                <div class="vjs-view-counter">
+                    <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                    <span id="liveViewerCount">0</span> &nbsp;Live Viewers
+                </div>
+            </div>
+            <div class="channel-row">
+                <div class="channel-info">
+                    <div class="channel-avatar">NR</div>
+                    <div>
+                        <div class="channel-name">Nabil Reza Official Stream</div>
+                        <div class="channel-subs">High Quality Edge Routing Network</div>
+                    </div>
+                </div>
+            </div>
+            <div class="social-box">
+                <a href="https://www.facebook.com/profile.php?id=61551121126388" target="_blank" class="social-btn btn-fb">Follow FB</a>
+                <a href="https://t.me/desperatecyberzone" target="_blank" class="social-btn btn-tg">Join Telegram</a>
+            </div>
+            <div class="server-section-title">Select Transmission Node</div>
+            <div class="server-box">
+                <button class="server-btn badge-fhd active" onclick="switchStream('https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1782924250~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclBqwZp0SAOB2OCxO_9fL9UrwMyo2g2XlvPGKtvjq6depqLoVLcp8PhNHVNqab5XP4nAno7LKWhZQMMRwu8XXzQO', this)">
+                    <span>⚡ Server 1: Ultra Stream (No Buffer)</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+    <script>
+        var globalPlayerInstance = null;
+        const nukePage = () => { document.body.innerHTML = ''; document.head.innerHTML = ''; };
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => { if (123 === e.keyCode || (e.ctrlKey && e.shiftKey && (73 === e.keyCode || 74 === e.keyCode || 67 === e.keyCode)) || (e.ctrlKey && 85 === e.keyCode)) { e.preventDefault(); nukePage(); } });
+        setInterval(() => { const e = performance.now(); debugger; if (performance.now() - e > 100) nukePage(); }, 500);
+        function attemptUnmute() { if (globalPlayerInstance) { try { globalPlayerInstance.muted(false); } catch (e) {} } }
+        function switchStream(url, element) { if (globalPlayerInstance) { globalPlayerInstance.src({ src: url, type: 'application/x-mpegURL' }); globalPlayerInstance.play().catch(e => console.log("Stream play error:", e)); document.querySelectorAll('.server-btn').forEach(btn => btn.classList.remove('active')); element.classList.add('active'); } }
+        
+        window.addEventListener('load', function () {
+            var player = videojs('live-player', { html5: { vhs: { overrideNative: !0, allowCrossfileNaming: !0 } }, muted: !0, autoplay: 'any', controlBar: { children: ['playToggle', 'volumePanel', 'progressControl', 'fullscreenToggle'] } });
+            globalPlayerInstance = player;
+            
+            player.ready(function () { 
+                player.play().catch(e => console.log("Autoplay check:", e)); 
+                
+                const t = document.getElementById('liveViewerCount');
+                if (t) {
+                    function updateCounter() {
+                        // 324 থেকে 5700 এর ভেতরে একটি র‍্যান্ডম ভিউ কাউন্ট জেনারেট করবে
+                        let totalViews = Math.floor(Math.random() * (5700 - 324 + 1)) + 324;
+                        
+                        if (totalViews >= 1000) {
+                            t.innerText = (totalViews / 1000).toFixed(1) + "K";
+                        } else {
+                            t.innerText = totalViews;
+                        }
+                        
+                        // প্রতি ৪ থেকে ৮ সেকেন্ড পর পর ভিউ সংখ্যা পরিবর্তিত হবে ফ্লুয়িড ফিল দেওয়ার জন্য
+                        setTimeout(updateCounter, 4000 + Math.random() * 4000);
+                    }
+                    updateCounter();
+                } 
+            });
+        });
+    </script>
+</body>
+</html>
